@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import Button from './components/UI/Button/Button'
 import './App.css';
@@ -10,14 +10,14 @@ function App() {
     console.log('App running: every state change entire re-executed, re-evaluated.')
     // this message always appeared in console because DemeOutput state is in App.js -> re-eval, re-exc
 
-    const toggleParagraphHandler = event => {
-        setShowParagraph(prevShowParagraph => !prevShowParagraph);  // clean way to set oposit state
-    };
+    const toggleParagraphHandler = useCallback(() => {
+        setShowParagraph((prevShowParagraph) => !prevShowParagraph) // clean way to set oposit state
+    }, []); 
 
     return (
         <div className="app">
             <h1>Hi there!</h1>
-            <DemoOutput show={false} />
+            <DemoOutput show={false} /> 
             <Button onClick={toggleParagraphHandler}>Toggle Paragraph!</Button>
         </div>
     );
